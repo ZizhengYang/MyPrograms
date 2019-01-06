@@ -1,6 +1,7 @@
 import os
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
 os.environ[
     'TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -48,11 +49,16 @@ with tf.Session() as sess:
     print("initial w2 values: ")
     print(sess.run(w2))
 
+    A = []
+    B = []
+    C = []
+
     for i in range(STEPS):
         start = (i*BATCH_SIZE) % NUM_TESTS
         end = start + BATCH_SIZE
         sess.run(train_step, feed_dict={x: X[start:end], y_: Y[start:end]})
-        if i % 200 == 0:
+
+        if i % 100 == 0:
             total_loss = sess.run(loss, feed_dict={x: X, y_: Y})
             learn = sess.run(learning_rate)
             print("After ", end="")
@@ -62,7 +68,17 @@ with tf.Session() as sess:
             print(", learning rate is ", end="")
             print(learn)
 
+            A.append(total_loss)
+            B.append(i)
+            C.append(learn)
+
     print("final w1 values: ")
     print(sess.run(w1))
     print("final w2 values: ")
     print(sess.run(w2))
+    print(B)
+    print(A)
+    print(C)
+    plt.scatter(B, A, c='red')
+    plt.scatter(B, C, c='blue')
+    plt.show()
