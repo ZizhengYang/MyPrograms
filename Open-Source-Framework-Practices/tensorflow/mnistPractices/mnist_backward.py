@@ -1,5 +1,7 @@
 import os
 import tensorflow as tf
+from tensorflow.python.training.saver import Saver
+
 from mnistPractices import mnist_forward
 # import mnist_forward
 from tensorflow.examples.tutorials.mnist import input_data as id
@@ -46,11 +48,15 @@ def backward(mnist):
     with tf.control_dependencies([train_step, ema_op]):
         train_op = tf.no_op(name="train")
 
-    Saver = tf.train.Saver()
+    saver = tf.train.Saver()
 
     with tf.Session() as sess:
         init = tf.global_variables_initializer()
         sess.run(init)
+
+        ckpt = tf.train.get_checkpoint_state(MODEL_SAVE_PATH)
+        if ckpt and ckpt.model_checkpoint_path:
+            saver.restore(sess, ckpt.model_checkpoint_path)
 
         for i in range(STEPS):
             xs, ys = mnist.train.next_batch(BATCH_SIZE)
@@ -63,7 +69,7 @@ def backward(mnist):
                 print(loss_value, end="")
                 print(", with the learning rate of ", end="")
                 print(learning)
-                Saver.save(sess, os.path.join(MODEL_SAVE_PATH, MODEL_NAME), global_step=global_step)
+                saver.save(sess, os.path.join(MODEL_SAVE_PATH, MODEL_NAME), global_step=global_step)
 
 
 def main():
