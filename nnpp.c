@@ -32,20 +32,24 @@ void initial_start_zero(int number)
 	struct NODE start_nodes[number];
 	for(int i = 0; i < number; i++)
 	{
-		struct NODE temp_n;
-		temp_n.num = nodeNum;
+		struct NODE temp;
+		temp.num = nodeNum;
 		nodeNum++;
-		temp_n.x = 0;
-		start_nodes[i] = temp_n;
+		temp.x = 0;
+		start_nodes[i] = temp;
 	}
 }
 
 void initial_end_zero(int number)
 {
-	struct LINEAR end_nodes[number];
+	struct NODE end_nodes[number];
 	for(int i = 0; i < number; i++)
 	{
-		
+		struct NODE temp;
+		temp.num = nodeNum;
+		nodeNum++;
+		temp.x = 0;
+		end_nodes[i] = temp;
 	}
 }
 
@@ -57,4 +61,3 @@ float doLinearOperation(struct NODE start, struct LINEAR linear)
 	float y = w * x + b;
 	return y;
 }
-
