@@ -1,11 +1,6 @@
-package test2;
 import java.math.*;
 
 public class CircleAndLine {
-
-	public static void main(String[] args) {
-		System.out.println("aaa: "+distance(218, 224, 211, 426, 201, 458, 25));
-	}
 
 	public static boolean distance(double x1, double x2, double y1, double y2, double x0, double y0, double r) {
 		
@@ -34,7 +29,7 @@ public class CircleAndLine {
 				&&(y <= Math.max(y1, y2))
 				&&(y >= Math.min(y1, y2))
 				)||((x1-x0)*(x1-x0)+(y1-y0)*(y1-y0) <= r*r)||((x2-x0)*(x2-x0)+(y2-y0)*(y2-y0) <= r*r);
-		
+
 	}
 
 }
