@@ -1,77 +1,135 @@
 package Sort.MergeSort;
 
 public class MergeSort {
-	
-	public static void doMergeSort(int[] arr) {
-		
-		MergeSort.Sort(arr, 0, arr.length);
-		
+
+	public static void doMergeSortSmallToLarge(int[] arr) {
+
+		MergeSort.SortSmallToLarge(arr, 0, arr.length-1);
+
 	}
-	
-	public static void Sort(int[] arr, int start, int end) {
-		
-		if(start == end) {return;}
-		
-		int sortSize = end - start + 1;
-		int mid;
-		//if (sortSize % 2 == 0) {
-		//	mid = start + sortSize / 2 - 1;
-		//} else {
-			mid = start + sortSize / 2;
-		//}
-		
-		Sort(arr, start, mid);
-		Sort(arr, mid + 1, end);
-		
-		Merge(arr, start, end, mid);
-		
+
+	public static void doMergeSortLargeToSmall(int[] arr) {
+
+		MergeSort.SortLargeToSmall(arr, 0, arr.length-1);
+
 	}
-	
-	public static void Merge(int[] arr, int start, int end, int mid) {
-		
+
+	public static void SortSmallToLarge(int[] arr, int start, int end) {
+
+		if(end == start) {return;}
+
+		int sortSize = end - start;
+		int mid = start + sortSize / 2;
+
+		//System.out.println(start+"--"+(mid)+"<==>"+(mid+1)+"--"+(end));
+		SortSmallToLarge(arr, start, mid);
+		SortSmallToLarge(arr, mid+1, end);
+
+		MergeSmallToLarge(arr, start, end, mid);
+
+	}
+
+	public static void SortLargeToSmall(int[] arr, int start, int end) {
+
+		if(end == start) {return;}
+
+		int sortSize = end - start;
+		int mid = start + sortSize / 2;
+
+		//System.out.println(start+"--"+(mid)+"<==>"+(mid+1)+"--"+(end));
+		SortLargeToSmall(arr, start, mid);
+		SortLargeToSmall(arr, mid+1, end);
+
+		MergeLargeToSmall(arr, start, end, mid);
+
+	}
+
+	public static void MergeSmallToLarge(int[] arr, int start, int end, int mid) {
+
 		int i = start;
 		int j = mid + 1;
 		int count = 0;
-		int[] buffer = new int[arr.length];
-		
-		while(i < mid + 1 && j < end) {
-			
-			if(arr[i] >= arr[j]) {
-				
+		int[] buffer = new int[end - start + 1];
+
+		while(i <= mid && j <= end)
+		{
+			if(arr[i] >= arr[j])
+			{
 				buffer[count] = arr[j];
-				i++;
 				count++;
-				
-			}
-			
-			if(arr[i] < arr[j]) {
-				
-				buffer[count] = arr[i];
 				j++;
-				count++;
-				
 			}
-			
+			else if(arr[j] > arr[i])
+			{
+				buffer[count] = arr[i];
+				count++;
+				i++;
+			}
 		}
-		
-		while(i < mid + 1) {
-			
+
+		while(i <= mid)
+		{
 			buffer[count] = arr[i];
+			count++;
 			i++;
-			count++;
-			
 		}
-		
-		while(j < end) {
-			
+
+		while(j <= end)
+		{
 			buffer[count] = arr[j];
-			j++;
 			count++;
-			
+			j++;
 		}
-		
-		arr = buffer;
-		
+
+		for(int k = start, c = 0; k <= end; k++, c++)
+		{
+			arr[k] = buffer[c];
+		}
+
+	}
+
+	public static void MergeLargeToSmall(int[] arr, int start, int end, int mid) {
+
+		int i = start;
+		int j = mid + 1;
+		int count = 0;
+		int[] buffer = new int[end - start + 1];
+
+		while(i <= mid && j <= end)
+		{
+			if(arr[i] <= arr[j])
+			{
+				buffer[count] = arr[j];
+				count++;
+				j++;
+			}
+			else if(arr[j] < arr[i])
+			{
+				buffer[count] = arr[i];
+				count++;
+				i++;
+			}
+		}
+
+		while(i <= mid)
+		{
+			buffer[count] = arr[i];
+			count++;
+			i++;
+		}
+
+		while(j <= end)
+		{
+			buffer[count] = arr[j];
+			count++;
+			j++;
+		}
+
+		for(int k = start, c = 0; k <= end; k++, c++)
+		{
+			arr[k] = buffer[c];
+		}
+
 	}
 
 }
