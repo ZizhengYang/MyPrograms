@@ -7,9 +7,7 @@ public class CircleAndLine {
 		double a = y2 - y1;
 		double b = x1 - x2;
 		double c = x2 * y1 - x1 * y2;
-		/*
-		double dist =  Math.abs(a*x0 + b*y0 + c)/Math.sqrt(a*a + b*b);
-		*/
+
 		double x = (b*b*x0-a*b*y0-a*c)/(a*a+b*b);
 		double y = (-a*b*x0+a*a*y0-b*c)/(a*a+b*b);
 		
