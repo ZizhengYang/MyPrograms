@@ -3,6 +3,11 @@ import numpy as np
 import sklearn.preprocessing as prep
 import matplotlib.pyplot as plt
 from tensorflow.examples.tutorials.mnist import input_data
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+
+INPUT = np.
 
 
 # Xaiver Initializer
@@ -97,3 +102,7 @@ class AdditiveGaussianNoiseAutocoder(object):
 
     def getBiases(self):
         return self.sess.run(self.weights['b1'])
+
+
+if __name__ == '__main__':
+    nist = id.read_data_sets('./dataBase/', one_hot=True)
