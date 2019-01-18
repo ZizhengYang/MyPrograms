@@ -77,3 +77,23 @@ class AdditiveGaussianNoiseAutocoder(object):
     # only calculate the loss value
     def calc_total_loss(self, X):
         return self.sess.run(self.loss, feed_dict={self.x: X, self.scale: self.training_scale})
+
+    # the results in the hidden layer -> which indicate the advance features inside the data
+    def transform(self, X):
+        return self.sess.run(self.hidden, feed_dict={self.x: X, self.scale: self.training_scale})
+
+    # use the results in the hidden layer as input to calculate the out layer -> recover the original data
+    def generate(self, hidden = None):
+        if hidden is None:
+            hidden = tf.random_normal(tf.shape(self.weights['b1']))
+        return self.sess.run(self.reconstruction, feed_dict={self.hidden: hidden})
+
+    # transform + generate
+    def reconstruct(self, X):
+        return self.sess.run(self.reconstruction, feed_dict={self.x: X, self.scale: self.training_scale})
+
+    def getWeights(self):
+        return self.sess.run(self.weights['w1'])
+
+    def getBiases(self):
+        return self.sess.run(self.weights['b1'])
