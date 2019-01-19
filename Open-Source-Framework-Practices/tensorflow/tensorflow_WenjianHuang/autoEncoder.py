@@ -126,30 +126,29 @@ def get_random_block_from_data(data, batch_size):
     return data[start_index:end_index]
 
 
-def Train():
-    mnist = input_data.read_data_sets('./dataBase/', one_hot=True)
-    X_train, X_test = standard_scale(mnist.train.images, mnist.test.images)
-    NUM_SAMPLE = int(mnist.train.num_examples)
-
-    AGN_autoencoder = AdditiveGaussianNoiseAutocoder(
-        n_input=INPUT,
-        n_hidden=HIDDEN,
-        transfer_function=tf.nn.softplus,
-        optimizer=tf.train.AdamOptimizer(learning_rate=LEARNING_RATE),
-        scale=0.1
-    )
-
-    for r in range(TRAINING_STEPS):
-        avg_loss = 0
-        total_batch = int(NUM_SAMPLE / BATCH_SIZE)
-        for i in range(total_batch):
-            batch_xs = get_random_block_from_data(data=X_train, batch_size=BATCH_SIZE)
-            loss = AGN_autoencoder.partial_fit(X=batch_xs)
-            avg_loss = loss / NUM_SAMPLE * BATCH_SIZE
-        if r % DISPLAY_STEPS == 0:
-            print("Loss value in this round = ", end="")
-            print(avg_loss)
-
-
-if __name__ == '__main__':
-    Train()
+if __name__ == "__main__":
+	mnist = input_data.read_data_sets("MINIST_data/",one_hot=True)
+	X_train,X_test = standard_scale(mnist.train.images,mnist.test.images)
+	n_samples = int(mnist.train.num_examples)
+	training_epochs = 20
+	batch_size = 128
+	display_step = 1
+	
+	autoencoder = AdditiveGaussianNoiseAutoencoder(
+		n_input = 784,
+		n_hidden = 200,
+		transfer_function = tf.nn.softplus,
+		optimizer = tf.train.AdamOptimizer(learning_rate = 0.001),
+		scale = 0.01
+	)
+	
+	for epoch in range(training_epochs):
+		avg_cost = 0.
+		total_batch = int(n_samples / batch_size)
+		for i in range(total_batch):
+			batch_xs = get_random_block_from_data(X_train,batch_size)
+			cost = autoencoder.partial_fit(batch_xs)
+			avg_cost += cost / n_samples * batch_size
+			
+		if epoch % display_step == 0:
+			print("Epoch:",'%04d' % (epoch + 1),"cost=","{:.9f}".format(avg_cost)
