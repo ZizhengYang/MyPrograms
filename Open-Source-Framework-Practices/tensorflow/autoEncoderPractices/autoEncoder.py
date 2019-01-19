@@ -7,6 +7,16 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
+IMAGE_LENGTH = 28
+INPUT = IMAGE_LENGTH * IMAGE_LENGTH
+HIDDEN = 400
+TRAINING_STEPS = 20
+BATCH_SIZE = 128
+DISPLAY_STEPS = 1
+LEARNING_RATE = 0.001
+MODEL_SAVE_PATH = "./model/"
+
+
 # Xaiver Initializer
 def xavier_init(fan_in, fan_out, constant=1):
     low = -constant * np.sqrt(6.0 / (fan_in + fan_out))
@@ -32,7 +42,7 @@ class AdditiveGaussianNoiseAutocoder(object):
         self.transfer = transfer_function
         self.scale = tf.placeholder(tf.float32)
         self.training_scale = scale
-        self.weights = self._initialize_weight()
+        self.weights = self._initializer_weights()
         self.x = tf.placeholder(tf.float32, [None, self.n_input])
         self.hidden = self.transfer(
             tf.add(
@@ -85,7 +95,7 @@ class AdditiveGaussianNoiseAutocoder(object):
         return self.sess.run(self.hidden, feed_dict={self.x: X, self.scale: self.training_scale})
 
     # use the results in the hidden layer as input to calculate the out layer -> recover the original data
-    def generate(self, hidden = None):
+    def generate(self, hidden=None):
         if hidden is None:
             hidden = tf.random_normal(tf.shape(self.weights['b1']))
         return self.sess.run(self.reconstruction, feed_dict={self.hidden: hidden})
@@ -116,5 +126,30 @@ def get_random_block_from_data(data, batch_size):
     return data[start_index:end_index]
 
 
+def Train():
+    mnist = input_data.read_data_sets('./dataBase/', one_hot=True)
+    X_train, X_test = standard_scale(mnist.train.images, mnist.test.images)
+    NUM_SAMPLE = int(mnist.train.num_examples)
+
+    AGN_autoencoder = AdditiveGaussianNoiseAutocoder(
+        n_input=INPUT,
+        n_hidden=HIDDEN,
+        transfer_function=tf.nn.softplus,
+        optimizer=tf.train.AdamOptimizer(learning_rate=LEARNING_RATE),
+        scale=0.1
+    )
+
+    for r in range(TRAINING_STEPS):
+        avg_loss = 0
+        total_batch = int(NUM_SAMPLE / BATCH_SIZE)
+        for i in range(total_batch):
+            batch_xs = get_random_block_from_data(data=X_train, batch_size=BATCH_SIZE)
+            loss = AGN_autoencoder.partial_fit(X=batch_xs)
+            avg_loss = loss / NUM_SAMPLE * BATCH_SIZE
+        if r % DISPLAY_STEPS == 0:
+            print("Loss value in this round = ", end="")
+            print(avg_loss)
+
+
 if __name__ == '__main__':
-    nist = id.read_data_sets('./dataBase/', one_hot=True)
+    Train()
