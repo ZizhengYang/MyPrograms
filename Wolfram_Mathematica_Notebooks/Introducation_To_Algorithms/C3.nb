@@ -1,0 +1,214 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7483,        206]
+NotebookOptionsPosition[      6895,        189]
+NotebookOutlinePosition[      7250,        205]
+CellTagsIndexPosition[      7207,        202]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+
+Asymptotic Notations:\
+\>", "Text",
+ CellChangeTimes->{{3.7538156282560244`*^9, 3.7538158070995307`*^9}, {
+  3.7538158875263014`*^9, 3.7538159598485284`*^9}, {3.7550459235649776`*^9, 
+  3.755045928425064*^9}, {3.75504595904043*^9, 3.7550459605376163`*^9}, {
+  3.7550472648074856`*^9, 3.7550472700883446`*^9}, {3.755047309576374*^9, 
+  3.7550473368849735`*^9}, {3.755047792931652*^9, 3.7550478427280045`*^9}, {
+  3.755049215710987*^9, 
+  3.7550492177457266`*^9}},ExpressionUUID->"32e93eeb-3d78-48e6-b591-\
+d52b6047c20d"],
+
+Cell[BoxData[""], "Input",
+ CellFrame->{{0, 0}, {0, 3}},
+ CellChangeTimes->{{3.7550489657695904`*^9, 
+  3.7550489671306477`*^9}},ExpressionUUID->"70be78b7-2e0b-4429-b56f-\
+6b496a8fe40f"],
+
+Cell[TextData[{
+ "( \[CapitalTheta] ) \n{\n\tf(n) =  \[CapitalTheta](g(n))\n} := {\n\t\
+\[Exists] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["c", "1"], TraditionalForm]],ExpressionUUID->
+  "fe7e5b9b-3130-4c8c-9b45-5493267a975f"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["c", "2"], TraditionalForm]],ExpressionUUID->
+  "59606d16-c861-4ec8-a92d-2990c10d1a7b"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "0"], TraditionalForm]],ExpressionUUID->
+  "6f2a1bcd-96f9-4807-8eeb-510a5abf709f"],
+ ", \n\tfor \[ForAll]n \[GreaterSlantEqual] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "0"], TraditionalForm]],ExpressionUUID->
+  "11c6e4bf-d99e-4947-bea6-1aa743eb2018"],
+ ", \n\t0 \[LessSlantEqual] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["c", "1"], TraditionalForm]],ExpressionUUID->
+  "0d78db98-5a5a-47c6-b27d-7dc73918a419"],
+ "\[Cross]g(n) \[LessSlantEqual] f(n) \[LessSlantEqual] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["c", "2"], "\[Cross]"}], TraditionalForm]],ExpressionUUID->
+  "82ebe3e3-886b-4d67-a5af-443b6532fce0"],
+ "g(n)\n}\n\n( O ) \n{\n\tf(n) =  O(g(n))\n} := {\n\t\[Exists] ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]],ExpressionUUID->
+  "1a6bc2f9-0fd8-43d3-95f3-a70c55700020"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "0"], TraditionalForm]],ExpressionUUID->
+  "d94eb76f-2412-41a4-b113-a46e47a96397"],
+ ", \n\tfor \[ForAll]n \[GreaterSlantEqual] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "0"], TraditionalForm]],ExpressionUUID->
+  "c02f2c70-e5e9-421b-af79-b7aa3b471887"],
+ ", \n\t0 \[LessSlantEqual] f(n) \[LessSlantEqual] ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]],ExpressionUUID->
+  "d148af40-33ab-4ae1-85cb-ff860a5e1fe7"],
+ "\[Cross]g(n)\n}\n\n( o ) \n{\n\tf(n) =  o(g(n))\n} := {\n\t\[ForAll] ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]],ExpressionUUID->
+  "96e62893-a6c1-446e-9416-9e8fe4091ea2"],
+ " > 0, ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "0"], TraditionalForm]],ExpressionUUID->
+  "b50abde9-2535-47df-8271-1f3c6e0a89ae"],
+ " > 0, \n\tfor \[ForAll]n \[GreaterSlantEqual] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "0"], TraditionalForm]],ExpressionUUID->
+  "8383bde7-eaf8-4aaa-8ecf-7eae8b5cc19b"],
+ ", \n\t0 \[LessSlantEqual] f(n) < ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]],ExpressionUUID->
+  "39dc64ef-3787-4969-b30e-4bbf214f4a14"],
+ "\[Cross]g(n)\n}\n\n( \[CapitalOmega] ) \n{\n\tf(n) =  \[CapitalOmega](g(n))\
+\n} := {\n\t\[Exists] ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]],ExpressionUUID->
+  "a8e0140b-9849-49cd-a692-c05efa656f59"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "0"], TraditionalForm]],ExpressionUUID->
+  "85efcdad-ed02-46c7-bff0-80291ebb5235"],
+ ", \n\tfor \[ForAll]n \[GreaterSlantEqual] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "0"], TraditionalForm]],ExpressionUUID->
+  "92aac98e-0e26-4e38-901e-cd875bd2ab9d"],
+ ", \n\t0 \[LessSlantEqual] ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]],ExpressionUUID->
+  "3392161f-8c46-4da6-b77b-50e5c291526a"],
+ "\[Cross]g(n) \[LessSlantEqual] f(n)\n}\n\n( \[Omega] ) \n{\n\tf(n) =  \
+\[Omega](g(n))\n} := {\n\t\[ForAll] ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]],ExpressionUUID->
+  "351b6593-a71d-414e-a365-bfa7e130c143"],
+ " > 0, ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "0"], TraditionalForm]],ExpressionUUID->
+  "e33b28fa-b86e-4829-b303-48d0ec876989"],
+ " > 0, \n\tfor \[ForAll]n \[GreaterSlantEqual] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "0"], TraditionalForm]],ExpressionUUID->
+  "897f5c88-ded5-4fb4-8b1d-ba974f1a0ed4"],
+ ", \n\t0 \[LessSlantEqual] ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]],ExpressionUUID->
+  "bd926bc7-97ba-41f0-81ee-28822239d0ae"],
+ "\[Cross]g(n) < f(n)\n}\n\n\niff {\n\tf(n) =  O(g(n)) \[Union] f(n) =  \
+\[CapitalOmega](g(n))\n} \[Implies] {\n\tf(n) =  \[CapitalTheta](g(n))\n}\n"
+}], "Text",
+ CellChangeTimes->{{3.7550489747893486`*^9, 3.7550491883160143`*^9}, {
+  3.755049226126512*^9, 3.755049229703001*^9}, {3.7550492629933386`*^9, 
+  3.755049289601946*^9}, {3.7550493198749585`*^9, 3.7550494279929523`*^9}, {
+  3.755049462964404*^9, 3.7550495431842585`*^9}, {3.755049614801901*^9, 
+  3.755049769279627*^9}, {3.7550498067779903`*^9, 3.7550498562839236`*^9}, {
+  3.755049889467106*^9, 3.755050001199473*^9}, {3.755051680831834*^9, 
+  3.7550516944311*^9}, {3.755051890093505*^9, 3.7550518928285117`*^9}, {
+  3.7551287779924*^9, 3.7551288093328094`*^9}, {3.7551289618242216`*^9, 
+  3.7551289907109118`*^9}, {3.755270536877448*^9, 
+  3.755270547745653*^9}},ExpressionUUID->"a84e34c4-be5e-4d6a-ac23-\
+aac61d68a00e"],
+
+Cell["\<\
+Rules :
+
+f(n) =  \[CapitalTheta](g(n)) \[Union] g(n) =  \[CapitalTheta](h(n))  :=  \
+f(n) =  \[CapitalTheta](h(n))
+f(n) =  O(g(n)) \[Union] g(n) =  O(h(n))  :=  f(n) = O(h(n)) 
+f(n) =  o(g(n)) \[Union] g(n) =  o(h(n))  :=  f(n) =  o(h(n))
+f(n) =  \[CapitalOmega](g(n)) \[Union] g(n) =  \[CapitalOmega](h(n))  :=  \
+f(n) =  \[CapitalOmega](h(n))
+f(n) =  \[Omega](g(n)) \[Union] g(n) =  \[Omega](h(n))  :=  f(n) =   \
+\[Omega](h(n))
+
+f(n) =  \[CapitalTheta](f(n))
+f(n) =  O(f(n))
+f(n) \[NotEqual] o(f(n))
+f(n) =  \[CapitalOmega](f(n))
+f(n) \[NotEqual]  \[Omega](f(n))
+
+iff g(n) =  \[CapitalTheta](f(n)) \[Implies] f(n) =  \[CapitalTheta](g(n))
+
+iff g(n) =  O(f(n)) \[Implies] f(n) =  \[CapitalOmega](g(n))
+iff g(n) =  o(f(n)) \[Implies] f(n) =  \[Omega](g(n))\
+\>", "Text",
+ CellChangeTimes->{{3.755049648382707*^9, 3.755049653733634*^9}, {
+  3.7550518491415615`*^9, 3.755052093680309*^9}, {3.755052224104117*^9, 
+  3.755052321567238*^9}},ExpressionUUID->"1742ea6a-2bfa-4d46-9000-\
+6dfc7c71e6b5"]
+},
+WindowSize->{710, 941},
+WindowMargins->{{Automatic, -7}, {Automatic, 0}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (2017\:5e7410\:67082\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 530, 11, 56, "Text",ExpressionUUID->"32e93eeb-3d78-48e6-b591-d52b6047c20d"],
+Cell[1091, 33, 186, 4, 39, "Input",ExpressionUUID->"70be78b7-2e0b-4429-b56f-6b496a8fe40f"],
+Cell[1280, 39, 4604, 120, 1156, "Text",ExpressionUUID->"a84e34c4-be5e-4d6a-ac23-aac61d68a00e"],
+Cell[5887, 161, 1004, 26, 408, "Text",ExpressionUUID->"1742ea6a-2bfa-4d46-9000-6dfc7c71e6b5"]
+}
+]
+*)
+
