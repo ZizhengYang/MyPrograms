@@ -7,9 +7,6 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
-INPUT = np.
-
-
 # Xaiver Initializer
 def xavier_init(fan_in, fan_out, constant=1):
     low = -constant * np.sqrt(6.0 / (fan_in + fan_out))
@@ -102,6 +99,21 @@ class AdditiveGaussianNoiseAutocoder(object):
 
     def getBiases(self):
         return self.sess.run(self.weights['b1'])
+
+
+# standardize the training data and test data
+def standard_scale(X_train, X_test):
+    preprocessor = prep.StandardScaler().fit(X_train)
+    X_train = preprocessor.transform(X_train)
+    X_test = preprocessor.transform(X_test)
+    return X_train, X_test
+
+
+# get random block from data
+def get_random_block_from_data(data, batch_size):
+    start_index = np.random.randint(0, len(data) - batch_size)
+    end_index = start_index + batch_size
+    return data[start_index:end_index]
 
 
 if __name__ == '__main__':
