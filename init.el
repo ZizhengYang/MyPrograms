@@ -1,0 +1,15 @@
+(package-initialize)
+
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(electric-indent-mode -1)
+(global-linum-mode t)
+(global-company-mode t)
+;(global-font-lock-mode t)
+
+(setq-default cursor-type 'bar)
+(setq default-tab-width 4)
+(setq inhibit-splash-screen t)
+;(setq display-time-mode t)
+;(setq display-time-day-and-date t)
+(require 'org)
