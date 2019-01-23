@@ -1,6 +1,8 @@
 # coding: utf-8
 from baike_spider import url_manager, html_parser, html_downloader, html_outputer
 
+COUNT = 20
+
 class SpiderMain(object):
     def __init__(self):
         self.urls = url_manager.UrlManager()
@@ -20,7 +22,7 @@ class SpiderMain(object):
                 new_urls, new_data = self.parser.parse(new_url, html_cont)
                 self.urls.add_new_urls(new_urls)
                 self.outputer.collect_data(new_data)
-                if count == 20:
+                if count == COUNT:
                     break
                 count += 1
             except:
