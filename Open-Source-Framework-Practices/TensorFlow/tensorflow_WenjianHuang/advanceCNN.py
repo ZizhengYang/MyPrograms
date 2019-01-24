@@ -1,6 +1,5 @@
 import cifar10, cifar10_input
 # cifar10.maybe_download_and_extract()
-
 import tensorflow as tf
 import os
 import matplotlib.pyplot as plt
@@ -62,12 +61,12 @@ weight3 = variable_with_weight_loss([dim, 384], stddev=0.04, w1=0.004)
 bias3 = tf.Variable(tf.constant(0.1, shape=[384]))
 local3 = tf.nn.relu(tf.matmul(h_pool2_flat, weight3) + bias3)
 
-keep_prob = tf.placeholder(tf.float32)
-local3_drop = tf.nn.dropout(local3, keep_prob)
+# keep_prob = tf.placeholder(tf.float32)
+# local3_drop = tf.nn.dropout(local3, keep_prob)
 
 weight4 = variable_with_weight_loss([384, 192], stddev=0.04, w1=0.004)
 bias4 = tf.Variable(tf.constant(0.1, shape=[192]))
-local4 = tf.nn.relu(tf.matmul(local3_drop, weight4) + bias4)
+local4 = tf.nn.relu(tf.matmul(local3, weight4) + bias4)
 
 weight5 = variable_with_weight_loss([192, 10], stddev=0.04, w1=0.004)
 bias5 = tf.Variable(tf.constant(0.1, shape=[10]))
@@ -75,7 +74,7 @@ local5 = tf.nn.relu(tf.matmul(local4, weight5) + bias5)
 
 loss = loss(local5, label_holder)
 train_op = tf.train.AdamOptimizer(1e-3).minimize(loss)
-top_k_op = tf.nn.in_top_k(local5, label_holder, 1)
+top_k_op = tf.nn.in_top_k(local5, tf.cast(label_holder, tf.int64), 1)
 
 saver = tf.train.Saver()
 init = tf.global_variables_initializer()
@@ -92,7 +91,7 @@ Loss = []
 for i in range(max_steps):
     start_time = time.time()
     image_batch, label_batch = sess.run([images_train, labels_train])
-    _, loss = sess.run([train_op, loss], feed_dict={image_holder: image_batch, label_holder: label_batch})
+    _, loss_value = sess.run([train_op, loss], feed_dict={image_holder: image_batch, label_holder: label_batch})
     duration = time.time() - start_time
     if i % 10 == 0:
         examples_per_sec = batch_size / duration
@@ -100,11 +99,24 @@ for i in range(max_steps):
         print("Step: ", end="")
         print(i, end="")
         print(" <==> Loss value is: ", end="")
-        print(loss)
+        print(loss_value)
+    Loss.append(loss_value)
 
 num_examples = 10000
 import math
-
+true_count = 0
+num_iter = int(math.ceil(num_examples / batch_size))
+step = 0
+total_sample_count = num_iter * batch_size
+while step < num_iter:
+    image_batch, label_batch = sess.run([images_test, labels_test])
+    prediction = sess.run([top_k_op], feed_dict={image_holder: image_batch, label_holder: label_batch})
+    true_count += np.sum(prediction)
+    step += 1
+precision = true_count / total_sample_count
+print("----------------Final Total Accuracy: ", end="")
+print(precision, end="")
+print("----------------")
 
 saver.save(sess, os.path.join(MODEL_SAVE_PATH, MODEL_NAME))
 plt.xlabel('Epochs')
