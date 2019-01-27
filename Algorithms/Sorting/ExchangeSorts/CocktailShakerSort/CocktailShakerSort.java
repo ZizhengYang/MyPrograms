@@ -1,5 +1,3 @@
-package Sort.ExchangeSorts.CocktailShakerSort;
-
 public class CocktailShakerSort {
 	
 	public static void CocktailShakerSort_SmallToLarge(int[] arr){
