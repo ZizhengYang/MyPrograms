@@ -1,5 +1,3 @@
-package Sort.ExchangeSorts.OddEvenSort;
-
 public class OddEvenSort {
 	
 	/*
