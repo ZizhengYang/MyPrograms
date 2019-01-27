@@ -1,5 +1,3 @@
-package Sort.ExchangeSorts.GnomeSort;
-
 public class GnomeSort {
 	
 	public static void gnomeSort_SmallToLarge(int[] arr) {
