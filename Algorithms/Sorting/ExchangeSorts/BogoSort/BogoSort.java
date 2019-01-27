@@ -1,5 +1,3 @@
-package Sort.ExchangeSorts.BogoSort;
-
 import java.util.Random;
 
 public class BogoSort {
