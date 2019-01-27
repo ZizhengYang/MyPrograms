@@ -1,5 +1,3 @@
-package Sort.ExchangeSorts.CombSort;
-
 public class CombSort {
 	
 	public static double declining_Rate = 1.3;
