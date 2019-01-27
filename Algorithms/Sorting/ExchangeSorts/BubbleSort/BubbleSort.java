@@ -1,5 +1,3 @@
-package Sort.ExchangeSorts.BubbleSort;
-
 public class BubbleSort {
 	
 	public static void bubbleSort_SmallToLarge(int[] arr)
