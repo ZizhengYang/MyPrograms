@@ -1,5 +1,3 @@
-package Sort.ExchangeSorts.QuickSort;
-
 public class QuickSort {
 	
 	public static void quickSort_SmallToLarge(int[] arr) {
